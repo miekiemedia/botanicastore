@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botanica Store | Natural Health & Alexa Voice Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        botanica: {
+                            50: '#f4f6f3',
+                            100: '#e5eae2',
+                            200: '#ccd6c6',
+                            300: '#a3b79f',
+                            400: '#73916e',
+                            500: '#4a6b5d',
+                            600: '#3a5449',
+                            700: '#2c4237',
+                            800: '#23342c',
+                            900: '#1b2923',
+                        },
+                        sand: {
+                            50: '#fcfbfa',
+                            100: '#F4F1EA',
+                            200: '#e8e2d5',
+                            300: '#d9cebc',
+                        },
+                        terracotta: {
+                            500: '#D97757',
+                            600: '#c26242',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2.5s infinite ease-in-out;
+        }
+        .waveform-bar {
+            animation: wave 1.2s infinite ease-in-out alternate;
+        }
+        @keyframes wave {
+            0% { height: 8px; }
+            100% { height: 36px; }
+        }
+        .waveform-bar:nth-child(2) { animation-delay: 0.2s; }
+        .waveform-bar:nth-child(3) { animation-delay: 0.4s; }
+        .waveform-bar:nth-child(4) { animation-delay: 0.1s; }
+        .waveform-bar:nth-child(5) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body class="bg-sand-100 text-botanica-900 font-sans antialiased selection:bg-botanica-300 selection:text-botanica-900">
+
+    <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-botanica-200/60 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-botanica-500 flex items-center justify-center text-white shadow-md shadow-botanica-500/20 group-hover:bg-botanica-600 transition">
+                    <i class="fa-solid fa-leaf text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-botanica-900 block">Botanica Store</span>
+                    <span class="text-xs font-medium text-botanica-500 block -mt-1">Organic & Alexa Voice Shop</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-botanica-800">
+                <a href="#shop" class="hover:text-botanica-500 transition">Shop</a>
+                <a href="#alexa-hub" class="hover:text-botanica-500 transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-amazon text-botanica-600"></i> Alexa Voice Hub
+                </a>
+                <a href="#voice-log" class="hover:text-botanica-500 transition">Voice Log</a>
+                <a href="#about" class="hover:text-botanica-500 transition">About Us</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="triggerVoiceSearch()" class="hidden sm:flex items-center gap-2 bg-botanica-500 hover:bg-botanica-600 text-white px-4 py-2 rounded-2xl text-xs font-semibold shadow-md transition">
+                    <i class="fa-solid fa-microphone"></i>
+                    <span>Speak to Alexa</span>
+                </button>
+
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-2xl bg-sand-200 hover:bg-botanica-200/50 text-botanica-800 transition flex items-center justify-center">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-terracotta-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-sand-50 via-botanica-50/40 to-sand-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-botanica-100 border border-botanica-200 px-4 py-2 rounded-full text-xs font-semibold text-botanica-800">
+                        <i class="fa-solid fa-microphone-lines text-botanica-500"></i>
+                        <span>Hands-free shopping via Amazon Alexa</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-botanica-900 leading-tight">
+                        Nurture Your Daily Wellness <span class="text-botanica-500 underline decoration-terracotta-500 decoration-wavy decoration-2">Naturally</span>.
+                    </h1>
+                    <p class="text-lg text-botanica-700 max-w-2xl mx-auto lg:mx-0">
+                        Discover 100% organic health supplements and pure botanicals. Order hands-free with Alexa, set automated wellness routines, and nourish your body the natural way.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#shop" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-botanica-500 hover:bg-botanica-600 text-white font-semibold shadow-lg shadow-botanica-500/30 transition text-center">
+                            Explore Catalog
+                        </a>
+                        <button onclick="triggerVoiceSearch()" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-sand-200 hover:bg-botanica-200/50 text-botanica-900 font-semibold transition text-center flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-amazon text-botanica-600"></i> Try Voice Assistant
+                        </button>
+                    </div>
+
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-botanica-200/60 max-w-lg mx-auto lg:mx-0">
+                        <div class="flex items-center gap-2 text-xs font-medium text-botanica-800">
+                            <i class="fa-solid fa-seedling text-botanica-500 text-base"></i>
+                            <span>100% Organic</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-medium text-botanica-800">
+                            <i class="fa-solid fa-truck-fast text-botanica-500 text-base"></i>
+                            <span>Free Delivery</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-medium text-botanica-800">
+                            <i class="fa-solid fa-shield-halved text-botanica-500 text-base"></i>
+                            <span>Lab Tested</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alexa Interactive Widget -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md bg-sand-50 rounded-3xl p-6 shadow-2xl border border-botanica-200/80">
+                        <div class="absolute -top-4 -right-4 bg-terracotta-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                            <i class="fa-solid fa-microphone animate-pulse"></i> Live Alexa Hub
+                        </div>
+                        <div class="flex items-center space-x-3 mb-6 pb-4 border-b border-botanica-100">
+                            <div class="w-10 h-10 rounded-full bg-botanica-100 flex items-center justify-center text-botanica-700 font-bold">
+                                <i class="fa-brands fa-amazon text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-botanica-900">Alexa Voice Companion</h3>
+                                <p class="text-xs text-botanica-500">Connected to Botanica Store Skill</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-botanica-50 p-4 rounded-2xl border border-botanica-100">
+                                <p class="text-xs font-semibold text-botanica-500 mb-1">Last Voice Command:</p>
+                                <p id="widget-last-command" class="text-sm font-medium text-botanica-900 italic">"Alexa, add Organic Ashwagandha to my cart"</p>
+                            </div>
+                            <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 flex items-start gap-3">
+                                <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-emerald-900">Alexa Response</p>
+                                    <p id="widget-last-response" class="text-xs text-emerald-800">Added Organic Ashwagandha KSM-66 to your cart successfully.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mic Trigger Button -->
+                        <div class="mt-6 pt-4 border-t border-botanica-100 flex items-center justify-between">
+                            <span id="listening-status" class="text-xs text-botanica-600 font-medium">Click mic to speak</span>
+                            <button onclick="toggleVoiceListening()" id="mic-main-btn" class="w-12 h-12 rounded-full bg-botanica-500 hover:bg-botanica-600 text-white shadow-lg flex items-center justify-center transition transform hover:scale-105">
+                                <i class="fa-solid fa-microphone text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="alexa-hub" class="py-20 bg-botanica-800 text-sand-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#a3b79f_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-botanica-300 text-xs font-bold tracking-widest uppercase mb-2 block">Interactive Voice Hub</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">Test Alexa Voice Commands</h2>
+                <p class="text-botanica-200 text-base">
+                    Click any quick command chip below or speak into your microphone to test real-time voice shopping simulation and text-to-speech audio feedback.
+                </p>
+            </div>
+
+            <div class="bg-botanica-900/90 backdrop-blur-md rounded-3xl border border-botanica-700 shadow-2xl p-6 sm:p-8">
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-5 space-y-3">
+                        <h3 class="text-sm font-semibold text-botanica-300 uppercase tracking-wider mb-2">Quick Voice Chips:</h3>
+                        <button onclick="simulateAlexaCommand('add ashwagandha')" class="w-full text-left p-3.5 rounded-2xl bg-botanica-800 hover:bg-botanica-700 border border-botanica-700 text-sand-50 text-sm font-medium transition flex items-center justify-between group">
+                            <span class="flex items-center gap-3">
+                                <i class="fa-solid fa-microphone text-botanica-400 group-hover:text-white transition"></i>
+                                "Alexa, add Ashwagandha"
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-xs text-botanica-400"></i>
+                        </button>
+                        <button onclick="simulateAlexaCommand('show immunity')" class="w-full text-left p-3.5 rounded-2xl bg-botanica-800 hover:bg-botanica-700 border border-botanica-700 text-sand-50 text-sm font-medium transition flex items-center justify-between group">
+                            <span class="flex items-center gap-3">
+                                <i class="fa-solid fa-microphone text-botanica-400 group-hover:text-white transition"></i>
+                                "Alexa, show immunity supplements"
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-xs text-botanica-400"></i>
+                        </button>
+                        <button onclick="simulateAlexaCommand('bestsellers')" class="w-full text-left p-3.5 rounded-2xl bg-botanica-800 hover:bg-botanica-700 border border-botanica-700 text-sand-50 text-sm font-medium transition flex items-center justify-between group">
+                            <span class="flex items-center gap-3">
+                                <i class="fa-solid fa-microphone text-botanica-400 group-hover:text-white transition"></i>
+                                "Alexa, what are bestsellers?"
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-xs text-botanica-400"></i>
+                        </button>
+                        <button onclick="simulateAlexaCommand('checkout')" class="w-full text-left p-3.5 rounded-2xl bg-botanica-800 hover:bg-botanica-700 border border-botanica-700 text-sand-50 text-sm font-medium transition flex items-center justify-between group">
+                            <span class="flex items-center gap-3">
+                                <i class="fa-solid fa-microphone text-botanica-400 group-hover:text-white transition"></i>
+                                "Alexa, checkout"
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-xs text-botanica-400"></i>
+                        </button>
+                    </div>
+
+                    <div class="md:col-span-7 bg-botanica-950 rounded-2xl p-6 border border-botanica-800 flex flex-col justify-between min-h-[300px]">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-semibold text-botanica-400 flex items-center gap-2">
+                                    <i class="fa-brands fa-amazon text-botanica-300"></i> Alexa Voice Assistant Terminal
+                                </span>
+                                <div id="terminal-status-indicator" class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                            </div>
+                            <div id="alexa-terminal-output" class="space-y-3">
+                                <p class="text-botanica-400 text-sm italic">"Ready for voice input. Click a command chip or use your microphone..."</p>
+                            </div>
+                        </div>
+
+                        <div id="alexa-wave-container" class="pt-6 flex items-center justify-center gap-1.5 h-12 opacity-30 transition-opacity duration-300">
+                            <div class="w-1.5 bg-botanica-400 rounded-full waveform-bar"></div>
+                            <div class="w-1.5 bg-botanica-400 rounded-full waveform-bar"></div>
+                            <div class="w-1.5 bg-botanica-400 rounded-full waveform-bar"></div>
+                            <div class="w-1.5 bg-botanica-400 rounded-full waveform-bar"></div>
+                            <div class="w-1.5 bg-botanica-400 rounded-full waveform-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="py-20 bg-sand-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-botanica-500 text-xs font-bold tracking-widest uppercase mb-2 block">Our Collection</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-botanica-900">Organic Health & Wellness</h2>
+                </div>
+                <div class="mt-6 md:mt-0 flex flex-wrap gap-2">
+                    <button onclick="filterProducts('all')" class="category-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-botanica-500 text-white transition">All Products</button>
+                    <button onclick="filterProducts('essentials')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-sand-200 text-botanica-800 hover:bg-botanica-200 transition">Daily Essentials</button>
+                    <button onclick="filterProducts('immunity')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-sand-200 text-botanica-800 hover:bg-botanica-200 transition">Immunity & Defense</button>
+                    <button onclick="filterProducts('energy')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-sand-200 text-botanica-800 hover:bg-botanica-200 transition">Energy & Vitality</button>
+                    <button onclick="filterProducts('calm')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-sand-200 text-botanica-800 hover:bg-botanica-200 transition">Sleep & Calm</button>
+                </div>
+            </div>
+
+            <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Products injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="voice-log" class="py-16 bg-botanica-50 border-y border-botanica-200/60">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <span class="text-botanica-500 text-xs font-bold tracking-widest uppercase mb-1 block">Audit & History</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-botanica-900">Recent Alexa Voice Commands</h2>
+                </div>
+                <button onclick="clearVoiceLog()" class="text-xs font-semibold text-botanica-600 hover:text-terracotta-500 transition underline">Clear History</button>
+            </div>
+            <div id="voice-log-container" class="bg-sand-50 rounded-2xl border border-botanica-200 p-6 shadow-sm space-y-3 min-h-[140px]">
+                <p class="text-xs text-botanica-500 italic">No voice commands recorded yet in this session.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="about" class="bg-botanica-900 text-sand-200 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-2xl bg-botanica-500 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-leaf text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-white">Botanica Store</span>
+                </div>
+                <p class="text-xs text-botanica-300">
+                    Your trusted destination for organic health supplements and daily wellness, fully optimized for Amazon Alexa voice shopping.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-4">Categories</h4>
+                <ul class="space-y-2 text-xs text-botanica-300">
+                    <li><a href="#shop" class="hover:text-white transition">Daily Essentials</a></li>
+                    <li><a href="#shop" class="hover:text-white transition">Immunity & Defense</a></li>
+                    <li><a href="#shop" class="hover:text-white transition">Energy & Vitality</a></li>
+                    <li><a href="#shop" class="hover:text-white transition">Sleep & Calm</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-4">Alexa Voice Shop</h4>
+                <ul class="space-y-2 text-xs text-botanica-300">
+                    <li><a href="#alexa-hub" class="hover:text-white transition">Voice Shopping Hub</a></li>
+                    <li><a href="#voice-log" class="hover:text-white transition">Command History</a></li>
+                    <li><a href="#" class="hover:text-white transition">Enable Alexa Skill</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm mb-4">Customer Care</h4>
+                <ul class="space-y-2 text-xs text-botanica-300">
+                    <li><a href="#" class="hover:text-white transition">Shipping & Returns</a></li>
+                    <li><a href="#" class="hover:text-white transition">Sustainability & Purity</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact & FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-botanica-800 text-center text-xs text-botanica-400">
+            &copy; 2026 Botanica Store. All rights reserved. Designed with an organic and natural aesthetic.
+        </div>
+    </footer>
+
+    <!-- Cart Drawer Modal -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-botanica-900/60 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-sand-50 shadow-2xl flex flex-col">
+                <div class="flex items-center justify-between px-6 py-6 border-b border-botanica-200">
+                    <h2 class="text-lg font-bold text-botanica-900 flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-botanica-500"></i> Your Cart
+                    </h2>
+                    <button onclick="toggleCart()" class="p-2 rounded-xl text-botanica-700 hover:bg-botanica-200/50 transition">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Dynamic cart items -->
+                </div>
+                <div class="p-6 border-t border-botanica-200 bg-sand-100 space-y-4">
+                    <div class="flex justify-between items-center text-sm font-semibold text-botanica-900">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal" class="text-lg font-bold text-botanica-600">$0.00</span>
+                    </div>
+                    <p class="text-xs text-botanica-500">Includes taxes & free delivery with Alexa Pay.</p>
+                    <button onclick="checkout()" class="w-full py-4 rounded-2xl bg-botanica-500 hover:bg-botanica-600 text-white font-semibold shadow-lg shadow-botanica-500/20 transition text-center">
+                        Checkout with Alexa Pay
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-botanica-900 text-sand-50 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 border border-botanica-700">
+        <div class="w-8 h-8 rounded-full bg-botanica-500 text-white flex items-center justify-center">
+            <i class="fa-solid fa-check text-sm"></i>
+        </div>
+        <div>
+            <p id="toast-title" class="text-xs font-bold text-botanica-200">Notification</p>
+            <p id="toast-message" class="text-sm font-medium text-white">Action completed successfully.</p>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Organic Ashwagandha KSM-66",
+                category: "calm",
+                price: 24.95,
+                rating: 4.9,
+                reviews: 128,
+                image: "https://placehold.co/400x400/e5eae2/2c4237?text=Ashwagandha",
+                badge: "100% Organic",
+                description: "Supports natural relaxation and helps manage stress with pure KSM-66 root extract.",
+                keywords: ["ashwagandha", "stress", "calm", "relax"]
+            },
+            {
+                id: 2,
+                name: "Pure Magnesium Bisglycinate",
+                category: "calm",
+                price: 21.50,
+                rating: 4.8,
+                reviews: 94,
+                image: "https://placehold.co/400x400/e5eae2/2c4237?text=Magnesium",
+                badge: "Best Seller",
+                description: "Optimal absorption for muscle recovery and restful sleep support.",
+                keywords: ["magnesium", "sleep", "muscles"]
+            },
+            {
+                id: 3,
+                name: "Organic Turmeric & Black Pepper",
+                category: "immunity",
+                price: 19.95,
+                rating: 4.9,
+                reviews: 156,
+                image: "https://placehold.co/400x400/e5eae2/2c4237?text=Turmeric",
+                badge: "Sustainably Sourced",
+                description: "Powerful antioxidant complex formulated with organic black pepper for enhanced bioavailability.",
+                keywords: ["turmeric", "immunity", "inflammation", "pepper"]
+            },
+            {
+                id: 4,
+                name: "Vitamin D3 + K2 Liquid Drops",
+                category: "immunity",
+                price: 17.50,
+                rating: 5.0,
+                reviews: 210,
+                image: "https://placehold.co/400x400/e5eae2/2c4237?text=Vitamin+D3",
+                badge: "Top Rated",
+                description: "Supports immune defense and bone health in convenient organic liquid drops.",
+                keywords: ["vitamin d", "d3", "immunity", "bones"]
+            },
+            {
+                id: 5,
+                name: "Organic Spirulina Superfood Powder",
+                category: "energy",
+                price: 22.95,
+                rating: 4.7,
+                reviews: 82,
+                image: "https://placehold.co/400x400/e5eae2/2c4237?text=Spirulina",
+                badge: "Superfood",
+                description: "Rich in plant proteins and natural iron for sustained daily vitality and energy.",
+                keywords: ["spirulina", "energy", "protein", "powder"]
+            },
+            {
+                id: 6,
+                name: "Rhodiola Rosea Extract",
+                category: "energy",
+                price: 26.50,
+                rating: 4.8,
+                reviews: 67,
+                image: "https://placehold.co/400x400/e5eae2/2c4237?text=Rhodiola",
+                badge: "Focus Blend",
+                description: "Fights mental fatigue and sharpens cognitive focus during demanding daily routines.",
+                keywords: ["rhodiola", "energy", "focus", "mental"]
+            }
+        ];
+
+        let cart = [];
+        let voiceLog = [];
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-sand-50 rounded-3xl p-6 border border-botanica-200/80 shadow-md hover:shadow-xl transition flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative mb-6 overflow-hidden rounded-2xl bg-botanica-100 aspect-square">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/e5eae2/2c4237?text=Botanica'">
+                            <span class="absolute top-3 left-3 bg-botanica-900/80 backdrop-blur-md text-sand-50 text-xs font-bold px-3 py-1 rounded-full">
+                                ${product.badge}
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-1 text-amber-600 text-xs mb-2 font-semibold">
+                            <i class="fa-solid fa-star"></i>
+                            <span>${product.rating}</span>
+                            <span class="text-botanica-400">(${product.reviews} reviews)</span>
+                        </div>
+                        <h3 class="font-bold text-botanica-900 text-lg mb-2">${product.name}</h3>
+                        <p class="text-xs text-botanica-600 mb-4 line-clamp-2">${product.description}</p>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xl font-extrabold text-botanica-900">$${product.price.toFixed(2)}</span>
+                            <span class="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg">In Stock</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="addToCart(${product.id})" class="py-3 px-3 rounded-xl bg-sand-200 hover:bg-botanica-200 text-botanica-900 font-semibold text-xs transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-bag-shopping"></i> Add
+                            </button>
+                            <button onclick="askAlexaAboutProduct('${product.name}')" class="py-3 px-3 rounded-xl bg-botanica-500 hover:bg-botanica-600 text-white font-semibold text-xs transition flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-amazon"></i> Ask Alexa
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-botanica-500', 'text-white');
+                btn.classList.add('bg-sand-200', 'text-botanica-800');
+            });
+            event.target.classList.remove('bg-sand-200', 'text-botanica-800');
+            event.target.classList.add('bg-botanica-500', 'text-white');
+            renderProducts(category);
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+            showToast("Added to Cart", `${product.name} added successfully.`);
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.textContent = totalItems;
+
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-botanica-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3"></i>
+                        <p class="text-sm font-medium">Your cart is currently empty.</p>
+                    </div>
+                `;
+                document.getElementById('cart-subtotal').textContent = '$0.00';
+                return;
+            }
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex items-center justify-between bg-sand-100 p-4 rounded-2xl border border-botanica-200';
+                itemEl.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-xl object-cover">
+                        <div>
+                            <h4 class="text-xs font-bold text-botanica-900">${item.name}</h4>
+                            <p class="text-xs text-botanica-600">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="changeQuantity(${item.id}, 1)" class="w-7 h-7 rounded-lg bg-sand-200 hover:bg-botanica-200 text-botanica-800 flex items-center justify-center font-bold text-xs">+</button>
+                        <button onclick="changeQuantity(${item.id}, -1)" class="w-7 h-7 rounded-lg bg-sand-200 hover:bg-botanica-200 text-botanica-800 flex items-center justify-center font-bold text-xs">-</button>
+                    </div>
+                `;
+                container.appendChild(itemEl);
+            });
+
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        function changeQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+                updateCartUI();
+            }
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('hidden');
+        }
+
+        // Web Speech API & Alexa Simulation
+        function speakAlexa(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function logVoiceCommand(command, response) {
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            voiceLog.unshift({ time, command, response });
+            if (voiceLog.length > 10) voiceLog.pop();
+            renderVoiceLog();
+        }
+
+        function renderVoiceLog() {
+            const container = document.getElementById('voice-log-container');
+            if (voiceLog.length === 0) {
+                container.innerHTML = `<p class="text-xs text-botanica-500 italic">No voice commands recorded yet in this session.</p>`;
+                return;
+            }
+            container.innerHTML = '';
+            voiceLog.forEach(log => {
+                const el = document.createElement('div');
+                el.className = 'flex items-start justify-between bg-sand-100 p-3.5 rounded-xl border border-botanica-200 text-xs';
+                el.innerHTML = `
+                    <div>
+                        <span class="font-bold text-botanica-900 block mb-0.5">"${log.command}"</span>
+                        <span class="text-botanica-600">${log.response}</span>
+                    </div>
+                    <span class="text-botanica-400 font-mono text-[10px]">${log.time}</span>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function clearVoiceLog() {
+            voiceLog = [];
+            renderVoiceLog();
+            showToast("History Cleared", "Voice command log has been cleared.");
+        }
+
+        function handleAlexaQuery(transcript) {
+            const lower = transcript.toLowerCase();
+            let response = "I'm sorry, I didn't quite catch that. Try asking to add Ashwagandha or show immunity supplements.";
+
+            document.getElementById('widget-last-command').textContent = `"${transcript}"`;
+
+            if (lower.includes('ashwagandha') || lower.includes('add ashwagandha')) {
+                addToCart(1);
+                response = "Added Organic Ashwagandha KSM-66 to your cart.";
+            } else if (lower.includes('immunity') || lower.includes('immune')) {
+                filterProducts('immunity');
+                response = "Showing our top organic immunity and defense supplements.";
+            } else if (lower.includes('bestseller') || lower.includes('best')) {
+                response = "Our top bestseller right now is Pure Magnesium Bisglycinate and Vitamin D3 drops.";
+            } else if (lower.includes('cart') || lower.includes('basket')) {
+                toggleCart();
+                response = "Opening your shopping cart.";
+            } else if (lower.includes('checkout')) {
+                checkout();
+                response = "Processing checkout with Alexa Pay.";
+            } else {
+                response = `You said: "${transcript}". Let me help you find the right health supplement.`;
+            }
+
+            document.getElementById('widget-last-response').textContent = response;
+            document.getElementById('alexa-terminal-output').innerHTML = `
+                <p class="text-xs font-bold text-botanica-300">Alexa Voice Output:</p>
+                <p class="text-sm text-white font-medium">"${response}"</p>
+                <span class="inline-block mt-2 text-xs bg-emerald-900/60 text-emerald-300 px-2.5 py-1 rounded-full font-semibold">Executed Successfully</span>
+            `;
+
+            logVoiceCommand(transcript, response);
+            speakAlexa(response);
+        }
+
+        function simulateAlexaCommand(type) {
+            const waveContainer = document.getElementById('alexa-wave-container');
+            waveContainer.classList.remove('opacity-30');
+            waveContainer.classList.add('opacity-100');
+
+            setTimeout(() => {
+                waveContainer.classList.remove('opacity-100');
+                waveContainer.classList.add('opacity-30');
+
+                if (type === 'add ashwagandha') {
+                    handleAlexaQuery("Alexa, add Organic Ashwagandha to my cart");
+                } else if (type === 'show immunity') {
+                    handleAlexaQuery("Alexa, show me immunity supplements");
+                } else if (type === 'bestsellers') {
+                    handleAlexaQuery("Alexa, what are today's bestsellers?");
+                } else if (type === 'checkout') {
+                    handleAlexaQuery("Alexa, checkout");
+                }
+            }, 800);
+        }
+
+        function askAlexaAboutProduct(productName) {
+            handleAlexaQuery(`Alexa, tell me about ${productName}`);
+            document.getElementById('alexa-hub').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        let isListening = false;
+        function triggerVoiceSearch() {
+            document.getElementById('alexa-hub').scrollIntoView({ behavior: 'smooth' });
+            toggleVoiceListening();
+        }
+
+        function toggleVoiceListening() {
+            const statusEl = document.getElementById('listening-status');
+            const waveContainer = document.getElementById('alexa-wave-container');
+
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showToast("Voice not supported", "Your browser does not support speech recognition. Use quick command chips.");
+                simulateAlexaCommand('add ashwagandha');
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                isListening = true;
+                statusEl.textContent = "Listening to your voice...";
+                statusEl.classList.add('text-terracotta-500', 'font-bold');
+                waveContainer.classList.remove('opacity-30');
+                waveContainer.classList.add('opacity-100');
+            };
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                handleAlexaQuery(speechResult);
+            };
+
+            recognition.onerror = function(event) {
+                statusEl.textContent = "Error listening. Try again.";
+                waveContainer.classList.remove('opacity-100');
+                waveContainer.classList.add('opacity-30');
+            };
+
+            recognition.onend = function() {
+                isListening = false;
+                statusEl.textContent = "Click mic to speak";
+                statusEl.classList.remove('text-terracotta-500', 'font-bold');
+                waveContainer.classList.remove('opacity-100');
+                waveContainer.classList.add('opacity-30');
+            };
+
+            recognition.start();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast("Cart is Empty", "Please add items to your cart before checkout.");
+                return;
+            }
+            showToast("Order Placed Successfully!", "Thank you for shopping with Botanica Store. Alexa sent your confirmation.");
+            cart = [];
+            updateCartUI();
+            if (!document.getElementById('cart-drawer').classList.contains('hidden')) {
+                toggleCart();
+            }
+        }
+
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+        }
+
+        window.onload = function() {
+            renderProducts();
+            renderVoiceLog();
+        };
+    </script>
+</body>
+</html>
